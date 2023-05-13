@@ -1,9 +1,10 @@
+import { createGlobalStyle } from "styled-components";
+
 import Bold from "@src/assets/fonts/Roboto-Bold.ttf";
 import Medium from "@src/assets/fonts/Roboto-Medium.ttf";
 import Regular from "@src/assets/fonts/Roboto-Regular.ttf";
-import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: Roboto;
     src: url(.${Regular}) format("truetype"),
@@ -24,8 +25,8 @@ export default createGlobalStyle`
   }
 
   #root{
-    margin:0 auto;
-    color: white;
-    background-color: black;
+    margin: 0 auto;
   }
 `;
+
+export default GlobalStyles;
