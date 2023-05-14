@@ -1,6 +1,8 @@
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
-export const baseURL = import.meta.env.VITE_HOST as string;
+import apiHost from "@src/utils/const/apiHost";
+
+export const baseURL = apiHost;
 
 const axios = Axios.create({
   baseURL,
