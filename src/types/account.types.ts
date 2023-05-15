@@ -11,7 +11,7 @@ export interface IAccountSettings {
   proxyInstance: string;
   outgoingWebhook: string;
   outgoingMessageWebhook: string;
-  outgoingAPIMessageWebhook: string;
+  outgoingAPIOutgoingMessageWebhook: string;
   incomingWebhook: string;
   deviceWebhook: string;
   statusInstanceWebhook: string;
