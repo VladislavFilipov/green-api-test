@@ -1,9 +1,6 @@
 import request from "@src/lib/axiosRequest";
 import { TSendOutgoingMessage } from "@src/types/message.types";
-import {
-  INotification,
-  INotification
-} from "@src/types/notification.types";
+import { INotification } from "@src/types/notification.types";
 import { DELETE, GET, POST } from "@src/utils/const/httpMethods";
 
 const chatApi = {
