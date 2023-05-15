@@ -1,7 +1,19 @@
 import { FC } from "react";
 
+import { Chat, Dialogs } from "@src/features/messaging";
+import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
+
 const Main: FC = () => {
-  return <div>Main</div>;
+  const cureentDialog = useChatsStore(s => s.current);
+  return (
+    <div>
+      <Dialogs />
+      <br />
+      <br />
+      <br />
+      {cureentDialog && <Chat />}
+    </div>
+  );
 };
 
 export default Main;

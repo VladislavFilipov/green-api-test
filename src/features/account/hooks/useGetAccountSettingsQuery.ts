@@ -8,6 +8,7 @@ import { QUERY_KEY_GET_ACCOUNT_SETTINGS } from "@src/utils/const/queryKeys";
 
 const useGetAccountSettingsQuery = (authData: IAuthData | null) => {
   const setAccountSettings = useAccountStore(s => s.setAccountSettings);
+  const setAuthData = useAccountStore(s => s.setAuthData);
 
   const accountSettingsRes = useQuery({
     queryKey: [QUERY_KEY_GET_ACCOUNT_SETTINGS, authData],
@@ -22,6 +23,7 @@ const useGetAccountSettingsQuery = (authData: IAuthData | null) => {
     },
     onSuccess: accountSettings => {
       setAccountSettings(accountSettings);
+      setAuthData(authData);
     },
     enabled: !!authData
   });
