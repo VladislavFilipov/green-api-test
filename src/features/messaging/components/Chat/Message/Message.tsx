@@ -11,11 +11,11 @@ const Message: FC<{ message: IHistoryItem }> = ({ message }) => {
     <S.Container type={message.type}>
       <S.Body>
         <S.Text size="s" inline>
-          {message.text}
+          {message.textMessage}
         </S.Text>
         <S.FloatBlock>
           <Time timestamp={message.timestamp} />
-          <MessageStatus message={message} />
+          <MessageStatus status={message.statusMessage} />
         </S.FloatBlock>
       </S.Body>
     </S.Container>

@@ -1,7 +1,7 @@
 import { FC, useRef } from "react";
 
 import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
-import useSendMessageMutation from "@src/features/messaging/hooks/useSendMessageMutation";
+import useSendMessageMutation from "@src/features/messaging/queries/useSendMessageMutation";
 import { IChat } from "@src/types/chat.types";
 
 import * as S from "./Input.styled";

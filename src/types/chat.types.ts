@@ -16,8 +16,11 @@ export type TOutgoingMessageStatus = "sent" | "delivered" | "read";
 export interface IHistoryItem {
   type: TMessageType;
   idMessage: string;
-  text: string;
+  textMessage?: string;
   timestamp: number;
-  status?: TOutgoingMessageStatus;
-  message: IIncomingMessage | IOutgoingMessage;
+  typeMessage: string;
+  statusMessage?: TOutgoingMessageStatus;
+  chatId: string;
+  senderId?: string;
+  senderName?: string;
 }

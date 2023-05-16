@@ -1,7 +1,7 @@
 import { FC, useRef } from "react";
 
 import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
-import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
+import useChatsStore from "@src/features/messaging/store/useChatsStore";
 
 import * as S from "./NewChat.styled";
 

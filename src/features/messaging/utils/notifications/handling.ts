@@ -1,4 +1,4 @@
-import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
+import useChatsStore from "@src/features/messaging/store/useChatsStore";
 import { IIncomingMessage } from "@src/types/message.types";
 import {
   INotification,

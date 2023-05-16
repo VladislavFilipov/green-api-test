@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 import messagingApi from "@src/api/chat.api";
-import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
+import useChatsStore from "@src/features/messaging/store/useChatsStore";
 import {
   IOutgoingMessage,
   TSendOutgoingMessage

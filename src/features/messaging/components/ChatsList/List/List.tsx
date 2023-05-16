@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import ListItem from "@src/features/messaging/components/ChatsList/ListItem/ListItem";
-import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
+import useChatsStore from "@src/features/messaging/store/useChatsStore";
 
 import * as S from "./List.styled";
 

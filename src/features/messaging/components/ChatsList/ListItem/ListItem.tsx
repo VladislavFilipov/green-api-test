@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import MessageStatus from "@src/features/messaging/components/MessageStatus/MessageStatus";
 import Time from "@src/features/messaging/components/Time/Time";
-import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
+import useChatsStore from "@src/features/messaging/store/useChatsStore";
 import { IChat } from "@src/types/chat.types";
 
 import * as S from "./ListItem.styled";
@@ -20,8 +20,8 @@ const ListItem: FC<{ chat: IChat; active: boolean }> = ({ chat, active }) => {
       </S.Line1>
       {lastMessage && (
         <S.Line2>
-          <MessageStatus message={lastMessage} />
-          <S.LastMsg size="s">{lastMessage.text}</S.LastMsg>
+          <MessageStatus status={lastMessage.statusMessage} />
+          <S.LastMsg size="s">{lastMessage.textMessage}</S.LastMsg>
         </S.Line2>
       )}
     </S.Container>

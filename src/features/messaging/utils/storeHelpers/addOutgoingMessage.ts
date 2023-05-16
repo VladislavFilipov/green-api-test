@@ -16,9 +16,10 @@ const addOutgoingMessage = (
         {
           type: "outgoing",
           idMessage: message.idMessage,
-          text: message.message,
+          textMessage: message.message,
           timestamp: message.timestamp,
-          message: message
+          chatId: chat.chatId,
+          typeMessage: "textMessage"
         }
       ]
     };

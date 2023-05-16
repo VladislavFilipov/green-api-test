@@ -4,7 +4,8 @@ import { persist } from "zustand/middleware";
 import addIncomingMessage from "@src/features/messaging/utils/storeHelpers/addIncomingMessage";
 import addOutgoingMessage from "@src/features/messaging/utils/storeHelpers/addOutgoingMessage";
 import changeOutgoingMessageStatus from "@src/features/messaging/utils/storeHelpers/changeOutgoingMessageStatus";
-import { IChat } from "@src/types/chat.types";
+import updateChatHistory from "@src/features/messaging/utils/storeHelpers/updateChatHistory";
+import { IChat, IHistoryItem } from "@src/types/chat.types";
 import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
 import { IOutgoingStatusNotificationBody } from "@src/types/notification.types";
 
@@ -16,6 +17,7 @@ type TState = {
 type TActions = {
   selectChat: (number: IChat | null) => void;
   addChat: (number: string) => void;
+  setChatHistory: (chatId: string, history: IHistoryItem[]) => void;
   saveOutgoingMessage: (message: IOutgoingMessage) => void;
   updateOutgoingMessageStatus: (
     message: IOutgoingStatusNotificationBody
@@ -34,7 +36,6 @@ const useChatsStore = create<TState & TActions>()(
       ...initialState,
       selectChat: chat => {
         console.log("selectChat", chat);
-
         set({ current: chat });
       },
       addChat: number => {
@@ -44,6 +45,10 @@ const useChatsStore = create<TState & TActions>()(
           history: []
         };
         set({ chats: [...get().chats, chat], current: chat });
+      },
+      setChatHistory: (chatId, history) => {
+        const chats = updateChatHistory(get().chats, history, chatId);
+        set({ chats });
       },
       saveOutgoingMessage: message => {
         const [chats, current] = addOutgoingMessage(
