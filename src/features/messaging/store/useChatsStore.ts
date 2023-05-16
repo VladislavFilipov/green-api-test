@@ -1,10 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import chatApi from "@src/api/chat.api";
 import addIncomingMessage from "@src/features/messaging/utils/storeHelpers/addIncomingMessage";
 import addOutgoingMessage from "@src/features/messaging/utils/storeHelpers/addOutgoingMessage";
 import changeOutgoingMessageStatus from "@src/features/messaging/utils/storeHelpers/changeOutgoingMessageStatus";
-import { IChat } from "@src/types/chat.types";
+import getChatsListFromContacts from "@src/features/messaging/utils/storeHelpers/getChatsListFromContacts";
+import updateChatHistory from "@src/features/messaging/utils/storeHelpers/updateChatHistory";
+import { IContact } from "@src/types/account.types";
+import { IChat, IHistoryItem } from "@src/types/chat.types";
 import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
 import { IOutgoingStatusNotificationBody } from "@src/types/notification.types";
 
@@ -14,8 +18,10 @@ type TState = {
 };
 
 type TActions = {
-  selectChat: (number: IChat | null) => void;
+  setChats: (chats: IChat[]) => void;
+  selectChat: (number: IChat, count: number) => Promise<void>;
   addChat: (number: string) => void;
+  setChatHistory: (chatId: string, count: number) => Promise<void>;
   saveOutgoingMessage: (message: IOutgoingMessage) => void;
   updateOutgoingMessageStatus: (
     message: IOutgoingStatusNotificationBody
@@ -32,10 +38,26 @@ const useChatsStore = create<TState & TActions>()(
   persist(
     (set, get) => ({
       ...initialState,
-      selectChat: chat => {
-        console.log("selectChat", chat);
+      setChats: async chats => {
+        // const chats = await getChatsListFromContacts(get().chats, contacts);
 
+        set({
+          chats
+        });
+      },
+      selectChat: async (chat, count) => {
         set({ current: chat });
+
+        try {
+          const history = await chatApi.getChatHistory({
+            chatId: chat.chatId,
+            count
+          });
+
+          set({ current: { ...chat, history } });
+        } catch (error) {
+          console.log(error);
+        }
       },
       addChat: number => {
         const chat: IChat = {
@@ -44,6 +66,24 @@ const useChatsStore = create<TState & TActions>()(
           history: []
         };
         set({ chats: [...get().chats, chat], current: chat });
+      },
+      setChatHistory: async (chatId, count) => {
+        try {
+          const history = await chatApi.getChatHistory({
+            chatId: chatId,
+            count
+          });
+
+          const chats = updateChatHistory({
+            chats: get().chats,
+            history,
+            chatId
+          });
+
+          set({ chats });
+        } catch (error) {
+          console.log(error);
+        }
       },
       saveOutgoingMessage: message => {
         const [chats, current] = addOutgoingMessage(
@@ -83,7 +123,11 @@ const useChatsStore = create<TState & TActions>()(
       }
     }),
     {
-      name: "chats"
+      name: "chats",
+      partialize: state =>
+        Object.fromEntries(
+          Object.entries(state).filter(([key]) => !["current"].includes(key))
+        )
     }
   )
 );

@@ -1,5 +1,4 @@
 import { IChat } from "@src/types/chat.types";
-import { IOutgoingMessage } from "@src/types/message.types";
 import { IOutgoingStatusNotificationBody } from "@src/types/notification.types";
 
 const changeOutgoingMessageStatus = (
@@ -13,7 +12,7 @@ const changeOutgoingMessageStatus = (
     const history = [...chat.history];
     for (let i = chat.history.length - 1; i >= 0; i--) {
       if (chat.history[i].idMessage === notificationBody.idMessage) {
-        history[i].status = notificationBody.status;
+        history[i].statusMessage = notificationBody.status;
         break;
       }
     }

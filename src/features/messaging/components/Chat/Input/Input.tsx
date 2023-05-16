@@ -1,18 +1,18 @@
 import { FC, useRef } from "react";
 
 import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
-import useSendMessageMutation from "@src/features/messaging/hooks/useSendMessageMutation";
+import useSendMessage from "@src/features/messaging/queries/useSendMessage";
 import { IChat } from "@src/types/chat.types";
 
 import * as S from "./Input.styled";
 
 const Input: FC<{ chat: IChat }> = ({ chat }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const sendMessage = useSendMessageMutation();
+  const sendMessage = useSendMessage();
 
   const handleSendClick = () => {
     if (inputRef.current?.value && chat) {
-      sendMessage.mutateAsync({
+      sendMessage({
         chatId: chat.chatId,
         message: inputRef.current?.value
       });

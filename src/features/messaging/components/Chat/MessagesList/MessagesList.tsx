@@ -15,9 +15,11 @@ const MessagesList: FC<{ chat: IChat }> = ({ chat }) => {
   return (
     <S.Container ref={listRef}>
       <S.List>
-        {chat?.history.map(item => (
-          <Message key={item.idMessage} message={item} />
-        ))}
+        {chat?.history
+          // .filter(item => item.textMessage === "textMessage")
+          .map(item => (
+            <Message key={item.idMessage} message={item} />
+          ))}
       </S.List>
     </S.Container>
   );

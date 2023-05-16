@@ -1,5 +1,5 @@
-import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
-import { IIncomingMessage } from "@src/types/message.types";
+import useChatsStore from "@src/features/messaging/store/useChatsStore";
+import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
 import {
   INotification,
   IOutgoingStatusNotificationBody
@@ -12,10 +12,16 @@ const handleNotification = async (notification: INotification) => {
         .getState()
         .saveIncomingMessage(notification.body as IIncomingMessage);
       break;
-    // case "outgoingMessageReceived":
-    //   break;
-    // case "outgoingAPIMessageReceived":
-    //   break;
+    case "outgoingMessageReceived":
+      useChatsStore
+        .getState()
+        .saveOutgoingMessage(notification.body as IOutgoingMessage);
+      break;
+    case "outgoingAPIMessageReceived":
+      useChatsStore
+        .getState()
+        .saveOutgoingMessage(notification.body as IOutgoingMessage);
+      break;
     case "outgoingMessageStatus":
       useChatsStore
         .getState()

@@ -1,16 +1,33 @@
 import { INotificationBody } from "@src/types/notification.types";
 
-export interface IOutgoingMessage {
+export interface IOutgoingMessage extends INotificationBody {
+  instanceData: {
+    idInstance: number;
+    wid: string;
+    typeInstance: string;
+  };
   idMessage: string;
-  chatId: string;
-  message: string;
-  timestamp: number;
+  senderData: {
+    chatId: string;
+    sender: string;
+    chatName: string;
+    senderName: string;
+  };
+  messageData: {
+    typeMessage: string;
+    extendedTextMessageData?: {
+      text: string;
+    };
+    textMessageData: {
+      textMessage: string;
+    };
+  };
 }
 
-export type TSendOutgoingMessage = Omit<
-  IOutgoingMessage,
-  "idMessage" | "timestamp"
->;
+export type TSendOutgoingMessage = {
+  chatId: string;
+  message: string;
+};
 
 export interface IIncomingMessage extends INotificationBody {
   instanceData: {

@@ -7,7 +7,12 @@ const addOutgoingMessage = (
   current: IChat | null
 ): [IChat[], IChat | null] => {
   const chatsUpd = chats.map(chat => {
-    if (chat.chatId !== message.chatId) return chat;
+    if (chat.chatId !== message.senderData.chatId) return chat;
+
+    const textMessage =
+      message.messageData.typeMessage === "extendedTextMessage"
+        ? message.messageData.extendedTextMessageData?.text
+        : message.messageData.textMessageData.textMessage;
 
     const updated: IChat = {
       ...chat,
@@ -16,9 +21,10 @@ const addOutgoingMessage = (
         {
           type: "outgoing",
           idMessage: message.idMessage,
-          text: message.message,
+          textMessage: textMessage,
           timestamp: message.timestamp,
-          message: message
+          chatId: chat.chatId,
+          typeMessage: "textMessage"
         }
       ]
     };

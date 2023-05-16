@@ -1,5 +1,5 @@
 import { IChat } from "@src/types/chat.types";
-import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
+import { IIncomingMessage } from "@src/types/message.types";
 
 const addIncomingMessage = (
   chats: IChat[],
@@ -16,9 +16,10 @@ const addIncomingMessage = (
         {
           type: "incoming",
           idMessage: message.idMessage,
-          text: message.messageData.textMessageData.textMessage,
+          textMessage: message.messageData.textMessageData.textMessage,
           timestamp: message.timestamp,
-          message: message
+          chatId: chat.chatId,
+          typeMessage: message.messageData.typeMessage
         }
       ]
     };
