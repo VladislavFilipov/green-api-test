@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import accountApi from "@src/api/account.api";
 import useAccountStore from "@src/features/account/hooks/useAccountStore";
 import { IAuthData } from "@src/types/account.types";
-import getErrorInstance from "@src/utils/const/errors/getErrorInstance";
 import { QUERY_KEY_GET_ACCOUNT_SETTINGS } from "@src/utils/const/queryKeys";
+import getErrorInstance from "@src/utils/functions/errors/getErrorInstance";
 
 const useGetAccountSettingsQuery = (authData: IAuthData | null) => {
   const setAccountSettings = useAccountStore(s => s.setAccountSettings);

@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes, forwardRef } from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
 
 import * as S from "./TextField.styled";
 
@@ -6,6 +6,7 @@ type TProps = {
   label?: string;
   isPassword?: boolean;
   error?: string;
+  placeholder?: string;
   isTextarea?: boolean;
 };
 
@@ -13,9 +14,10 @@ type TInputProps = TProps & InputHTMLAttributes<HTMLInputElement>;
 const TextFieldWithRef = forwardRef<HTMLInputElement, TInputProps>(
   (
     {
-      label = "Введите текст",
+      label,
       isPassword,
       error,
+      placeholder = "Введите текст",
       isTextarea = false,
       ...inputProps
     },
@@ -28,7 +30,7 @@ const TextFieldWithRef = forwardRef<HTMLInputElement, TInputProps>(
           {...inputProps}
           type={isPassword ? "password" : "text"}
           ref={ref}
-          placeholder={label}
+          placeholder={label ?? placeholder}
         />
         {error && <S.Error>{error}</S.Error>}
       </S.Wrap>

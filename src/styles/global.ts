@@ -1,20 +1,10 @@
 import { createGlobalStyle } from "styled-components";
 
-import Bold from "@src/assets/fonts/Roboto-Bold.ttf";
-import Medium from "@src/assets/fonts/Roboto-Medium.ttf";
-import Regular from "@src/assets/fonts/Roboto-Regular.ttf";
-
 const GlobalStyles = createGlobalStyle`
-  @font-face {
-    font-family: Roboto;
-    src: url(.${Regular}) format("truetype"),
-    url(.${Medium}) format("truetype"),
-    url(.${Bold}) format("truetype");
-  }
 
   :root {
-    font-family: Roboto, sans-serif;
-    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
   }
 
   * {
@@ -26,6 +16,16 @@ const GlobalStyles = createGlobalStyle`
 
   #root{
     margin: 0 auto;
+  }
+
+  ul, ol, li {
+    list-style: none;
+  }
+
+  input {
+    appearance: none;
+    border: none;
+    outline: none;
   }
 `;
 

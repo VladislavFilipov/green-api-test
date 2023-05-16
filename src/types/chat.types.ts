@@ -7,16 +7,14 @@ export interface IChat {
   history: IHistoryItem[];
 }
 
-export type TOutgoingMessageStatus =
-  | "sent"
-  | "delivered"
-  | "read"
-  | "failed"
-  | "noAccount"
-  | "notInGroup";
+export type TMessageType = "incoming" | "outgoing";
+export type TOutgoingMessageStatus = "sent" | "delivered" | "read";
+// | "failed"
+// | "noAccount"
+// | "notInGroup";
 
-interface IHistoryItem {
-  type: "incoming" | "outgoing";
+export interface IHistoryItem {
+  type: TMessageType;
   idMessage: string;
   text: string;
   timestamp: number;
