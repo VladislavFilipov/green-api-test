@@ -1,18 +1,17 @@
 import { FC } from "react";
 
-import { Chat, Dialogs } from "@src/features/messaging";
+import { Chat, ChatsList } from "@src/features/messaging";
 import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
+
+import * as S from "./Main.styled";
 
 const Main: FC = () => {
   const cureentDialog = useChatsStore(s => s.current);
   return (
-    <div>
-      <Dialogs />
-      <br />
-      <br />
-      <br />
+    <S.Container>
+      <ChatsList />
       {cureentDialog && <Chat />}
-    </div>
+    </S.Container>
   );
 };
 

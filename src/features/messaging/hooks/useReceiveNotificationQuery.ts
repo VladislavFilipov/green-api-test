@@ -4,8 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import messagingApi from "@src/api/chat.api";
 import handleNotification from "@src/features/messaging/utils/notifications/handling";
-import getErrorInstance from "@src/utils/const/errors/getErrorInstance";
 import { QUERY_KEY_SEND_MESSAGE } from "@src/utils/const/queryKeys";
+import getErrorInstance from "@src/utils/functions/errors/getErrorInstance";
 
 const useReceiveNotificationQuery = () => {
   const [interval, setInterval] = useState<number>(1);

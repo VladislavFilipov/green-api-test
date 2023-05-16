@@ -34,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "@vitejs/plugin-react": "^4.0.0",
+    "babel-plugin-styled-components": "^2.1.1",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "postcss": "^8.4.23",

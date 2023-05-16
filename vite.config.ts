@@ -6,15 +6,29 @@ import svgr from "vite-plugin-svgr";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          [
+            "babel-plugin-styled-components",
+            {
+              displayName: true
+            }
+          ]
+        ]
+      }
+    }),
+    svgr()
+  ],
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: "./src/test/setup.ts",
+    setupFiles: "./src/test/setup.ts"
   },
   resolve: {
     alias: {
-      "@src": path.resolve(__dirname, "./src"),
-    },
-  },
+      "@src": path.resolve(__dirname, "./src")
+    }
+  }
 });

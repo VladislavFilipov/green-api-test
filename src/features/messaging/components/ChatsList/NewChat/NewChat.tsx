@@ -3,15 +3,14 @@ import { FC, useRef } from "react";
 import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
 import useChatsStore from "@src/features/messaging/hooks/useChatsStore";
 
-const Dialogs: FC = () => {
+import * as S from "./NewChat.styled";
+
+const NewChat: FC = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const addChat = useChatsStore(s => s.addChat);
-  const selectChat = useChatsStore(s => s.selectChat);
-  const chats = useChatsStore(s => s.chats);
-
   return (
-    <div>
-      <TextFieldWithRef ref={inputRef} label="Новый диалог" />
+    <S.Container>
+      <TextFieldWithRef ref={inputRef} placeholder="Новый чат" />
       <button
         onClick={() => {
           if (inputRef.current?.value) {
@@ -22,16 +21,8 @@ const Dialogs: FC = () => {
       >
         Add Chat
       </button>
-      <br />
-      <ul>
-        {chats?.map(chat => (
-          <li key={chat.chatId} onClick={() => selectChat(chat)}>
-            {chat.number} - {chat.name}
-          </li>
-        ))}
-      </ul>
-    </div>
+    </S.Container>
   );
 };
 
-export default Dialogs;
+export default NewChat;

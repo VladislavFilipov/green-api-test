@@ -7,6 +7,9 @@ import useAccountStore from "@src/features/account/hooks/useAccountStore";
 import Login from "@src/pages/Login/Login";
 import Main from "@src/pages/Main/Main";
 import GlobalStyles from "@src/styles/global";
+import { darkTheme } from "@src/styles/theme";
+
+import * as S from "./App.styled";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,9 +24,9 @@ const App: FC = () => {
   const accountSettings = useAccountStore(s => s.accountSettings);
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={{ text: "blue" }}>
+      <ThemeProvider theme={darkTheme}>
         <GlobalStyles />
-        {accountSettings ? <Main /> : <Login />}
+        <S.App>{accountSettings ? <Main /> : <Login />}</S.App>
       </ThemeProvider>
     </QueryClientProvider>
   );

@@ -6,8 +6,8 @@ import {
   IOutgoingMessage,
   TSendOutgoingMessage
 } from "@src/types/message.types";
-import getErrorInstance from "@src/utils/const/errors/getErrorInstance";
 import { QUERY_KEY_SEND_MESSAGE } from "@src/utils/const/queryKeys";
+import getErrorInstance from "@src/utils/functions/errors/getErrorInstance";
 
 const useSendMessageMutation = () => {
   const saveOutgoingMessage = useChatsStore(s => s.saveOutgoingMessage);
