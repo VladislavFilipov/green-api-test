@@ -7,8 +7,4 @@ export const ButtonWrap = styled.button`
   padding: 1rem;
   background-color: #fff;
   color: aliceblue;
-
-  ${(props) => css`
-    color: ${props.theme.text};
-  `}
 `;
