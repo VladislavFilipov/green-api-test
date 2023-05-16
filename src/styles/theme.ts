@@ -4,7 +4,9 @@ export const darkTheme: ITheme = {
   mode: "dark",
   palette: {
     primary: {
-      main: "#005C4BFF"
+      main: "#005C4BFF",
+      dark: "#025344",
+      light: "#006d59"
     },
     secondary: {
       main: ""
