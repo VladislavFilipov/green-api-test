@@ -2,11 +2,13 @@ import { FC } from "react";
 
 import { LoginForm } from "@src/features/account";
 
+import * as S from "./Login.styled";
+
 const Login: FC = () => {
   return (
-    <div>
+    <S.Container>
       <LoginForm />
-    </div>
+    </S.Container>
   );
 };
 

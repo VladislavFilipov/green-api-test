@@ -25,14 +25,15 @@ const TextFieldWithRef = forwardRef<HTMLInputElement, TInputProps>(
   ) => {
     return (
       <S.Wrap>
-        {label && <S.Label>{label}</S.Label>}
+        {label && <S.Label size="xs">{label}</S.Label>}
         <S.Input
           {...inputProps}
           type={isPassword ? "password" : "text"}
           ref={ref}
           placeholder={label ?? placeholder}
+          hasError={!!error}
         />
-        {error && <S.Error>{error}</S.Error>}
+        {error && <S.Error size="xs">{error}</S.Error>}
       </S.Wrap>
     );
   }

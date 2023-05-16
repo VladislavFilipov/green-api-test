@@ -3,10 +3,13 @@ import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import Button from "@src/components/Button/Button";
 import InputText from "@src/components/formInputs/InputText/InputText";
 import schema from "@src/features/account/components/LoginForm/_yupSchema";
 import useGetAccountSettingsQuery from "@src/features/account/hooks/useGetAccountSettingsQuery";
 import { IAuthData } from "@src/types/account.types";
+
+import * as S from "./LoginForm.styled";
 
 const LoginForm: FC = () => {
   const [authData, setAuthData] = useState<IAuthData | null>(null);
@@ -26,11 +29,12 @@ const LoginForm: FC = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(submitHandler)}>
-        <InputText name="idInstance" />
-        <InputText name="apiToketInstance" />
-        <input type="submit" value="Submit" />
-      </form>
+      <S.Form onSubmit={methods.handleSubmit(submitHandler)}>
+        <S.Title>Войти при помощи аккаунта GREEN-API</S.Title>
+        <InputText name="idInstance" placeholder="Номер аккаунта" />
+        <InputText name="apiToketInstance" placeholder="Ключ доступа" />
+        <Button text="Войти" type="submit" />
+      </S.Form>
     </FormProvider>
   );
 };

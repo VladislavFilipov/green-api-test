@@ -25,6 +25,7 @@ const TextField: FC<TProps & InputHTMLAttributes<HTMLInputElement>> = ({
         {...inputProps}
         type={isPassword ? "password" : "text"}
         placeholder={label ?? placeholder}
+        hasError={!!error}
       />
       {error && <S.Error>{error}</S.Error>}
     </S.Wrap>
