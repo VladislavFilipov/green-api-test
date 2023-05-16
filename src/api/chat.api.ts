@@ -1,4 +1,5 @@
 import request from "@src/lib/axiosRequest";
+import { IContact, IContactInfo } from "@src/types/account.types";
 import { IHistoryItem } from "@src/types/chat.types";
 import { TSendOutgoingMessage } from "@src/types/message.types";
 import { INotification } from "@src/types/notification.types";
@@ -30,6 +31,20 @@ const chatApi = {
       method: DELETE,
       urlFunc: authData =>
         `/waInstance${authData.idInstance}/DeleteNotification/${authData.apiToketInstance}/${receiptId}`
+    }),
+  checkPhoneNumber: async (data: { phoneNumber: number }) =>
+    request<{ existsWhatsapp: boolean }>({
+      method: POST,
+      urlFunc: authData =>
+        `/waInstance${authData.idInstance}/CheckWhatsapp/${authData.apiToketInstance}`,
+      data
+    }),
+  checkContact: async (data: { chatId: string }) =>
+    request<IContactInfo>({
+      method: POST,
+      urlFunc: authData =>
+        `/waInstance${authData.idInstance}/getContactInfo/${authData.apiToketInstance}`,
+      data
     })
 };
 

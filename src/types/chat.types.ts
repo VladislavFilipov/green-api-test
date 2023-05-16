@@ -1,7 +1,7 @@
 import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
 
 export interface IChat {
-  number: string;
+  number?: string;
   chatId: string;
   name?: string;
   history: IHistoryItem[];

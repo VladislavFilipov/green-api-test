@@ -8,7 +8,7 @@ import * as S from "./Main.styled";
 
 const Main: FC = () => {
   const cureentDialog = useChatsStore(s => s.current);
-  useReceiveNotification();
+  // useReceiveNotification();
 
   return (
     <S.Container>

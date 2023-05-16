@@ -8,13 +8,13 @@ let timeoutId: ReturnType<typeof setTimeout>;
 const useReceiveNotification = () => {
   useEffect(() => {
     receiveNotification();
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const receiveNotification = async () => {
     clearTimeout(timeoutId);
     try {
       const notification = await messagingApi.receiveNotification();
-      console.log("notification", notification);
 
       if (notification) {
         handleNotification(notification);
