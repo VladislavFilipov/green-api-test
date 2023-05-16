@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+import chatApi from "@src/api/chat.api";
 import addIncomingMessage from "@src/features/messaging/utils/storeHelpers/addIncomingMessage";
 import addOutgoingMessage from "@src/features/messaging/utils/storeHelpers/addOutgoingMessage";
 import changeOutgoingMessageStatus from "@src/features/messaging/utils/storeHelpers/changeOutgoingMessageStatus";
@@ -18,9 +19,9 @@ type TState = {
 
 type TActions = {
   setChats: (chats: IChat[]) => void;
-  selectChat: (number: IChat | null) => void;
+  selectChat: (number: IChat, count: number) => Promise<void>;
   addChat: (number: string) => void;
-  setChatHistory: (chatId: string, history: IHistoryItem[]) => void;
+  setChatHistory: (chatId: string, count: number) => Promise<void>;
   saveOutgoingMessage: (message: IOutgoingMessage) => void;
   updateOutgoingMessageStatus: (
     message: IOutgoingStatusNotificationBody
@@ -44,9 +45,19 @@ const useChatsStore = create<TState & TActions>()(
           chats
         });
       },
-      selectChat: chat => {
-        console.log("selectChat", chat);
+      selectChat: async (chat, count) => {
         set({ current: chat });
+
+        try {
+          const history = await chatApi.getChatHistory({
+            chatId: chat.chatId,
+            count
+          });
+
+          set({ current: { ...chat, history } });
+        } catch (error) {
+          console.log(error);
+        }
       },
       addChat: number => {
         const chat: IChat = {
@@ -56,9 +67,23 @@ const useChatsStore = create<TState & TActions>()(
         };
         set({ chats: [...get().chats, chat], current: chat });
       },
-      setChatHistory: (chatId, history) => {
-        const chats = updateChatHistory(get().chats, history, chatId);
-        set({ chats });
+      setChatHistory: async (chatId, count) => {
+        try {
+          const history = await chatApi.getChatHistory({
+            chatId: chatId,
+            count
+          });
+
+          const chats = updateChatHistory({
+            chats: get().chats,
+            history,
+            chatId
+          });
+
+          set({ chats });
+        } catch (error) {
+          console.log(error);
+        }
       },
       saveOutgoingMessage: message => {
         const [chats, current] = addOutgoingMessage(

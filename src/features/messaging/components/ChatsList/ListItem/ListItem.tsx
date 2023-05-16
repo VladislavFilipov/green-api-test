@@ -11,8 +11,10 @@ const ListItem: FC<{ chat: IChat; active: boolean }> = ({ chat, active }) => {
   const selectChat = useChatsStore(s => s.selectChat);
   const lastMessage = chat.history[chat.history.length - 1];
 
+  const handleChatClcik = () => selectChat(chat, 1000);
+
   return (
-    <S.Container active={active} onClick={() => selectChat(chat)}>
+    <S.Container active={active} onClick={handleChatClcik}>
       <S.Avatar></S.Avatar>
       <S.Line1>
         <S.Name size="l">{chat.name || chat.number}</S.Name>

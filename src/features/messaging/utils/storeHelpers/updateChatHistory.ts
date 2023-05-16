@@ -1,10 +1,14 @@
 import { IChat, IHistoryItem } from "@src/types/chat.types";
 
-const updateChatHistory = (
-  chats: IChat[],
-  history: IHistoryItem[],
-  chatId: string
-): IChat[] => {
+const updateChatHistory = ({
+  chats,
+  chatId,
+  history
+}: {
+  chats: IChat[];
+  history: IHistoryItem[];
+  chatId: string;
+}): IChat[] => {
   return chats.map(chat => {
     if (chat.chatId !== chatId) return chat;
 
