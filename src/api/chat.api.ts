@@ -11,7 +11,7 @@ const chatApi = {
       urlFunc: authData =>
         `/waInstance${authData.idInstance}/GetChatHistory/${authData.apiToketInstance}`,
       data
-    }),
+    }).then(res => res.reverse()),
   sendMessage: async (message: TSendOutgoingMessage) =>
     request<{ idMessage: string }>({
       method: POST,

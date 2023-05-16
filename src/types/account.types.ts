@@ -1,3 +1,5 @@
+import { string } from "yup";
+
 export interface IAccountSettings {
   wid: string;
   countryInstance: string;
@@ -23,4 +25,10 @@ export interface IAccountSettings {
 export interface IAuthData {
   idInstance: string;
   apiToketInstance: string;
+}
+
+export interface IContact {
+  id: string;
+  name: string;
+  type: string;
 }

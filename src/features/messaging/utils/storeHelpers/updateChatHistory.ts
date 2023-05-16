@@ -10,7 +10,7 @@ const updateChatHistory = (
 
     const updated: IChat = {
       ...chat,
-      history: history.reverse()
+      history
     };
 
     return updated;

@@ -15,14 +15,15 @@ const useSendMessageMutation = () => {
     mutationKey: [QUERY_KEY_SEND_MESSAGE],
     mutationFn: async (message: TSendOutgoingMessage) => {
       try {
-        const res = await messagingApi.sendMessage(message);
-        const outgoingMessage: IOutgoingMessage = {
-          ...message,
-          ...res,
-          timestamp: Math.floor(Date.now() / 1000)
-        };
-        saveOutgoingMessage(outgoingMessage);
-        return outgoingMessage;
+        // const res =
+        await messagingApi.sendMessage(message);
+        // const outgoingMessage: IOutgoingMessage = {
+        //   ...message,
+        //   ...res,
+        //   timestamp: Math.floor(Date.now() / 1000)
+        // };
+        // saveOutgoingMessage(outgoingMessage);
+        // return outgoingMessage;
       } catch (error) {
         throw getErrorInstance(error);
       }
