@@ -6,9 +6,10 @@ import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
 type TProps = {
   name: string;
   label?: string;
+  placeholder?: string;
 };
 
-const InputText: FC<TProps> = ({ name, label = "Введите текст" }) => {
+const InputText: FC<TProps> = ({ name, label, placeholder }) => {
   const {
     register,
     formState: { errors }
@@ -19,6 +20,7 @@ const InputText: FC<TProps> = ({ name, label = "Введите текст" }) =>
       label={label}
       error={errors[name]?.message?.toString()}
       {...register(name)}
+      placeholder={placeholder}
     />
   );
 };

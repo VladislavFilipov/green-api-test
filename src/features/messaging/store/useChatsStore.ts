@@ -7,7 +7,7 @@ import addOutgoingMessage from "@src/features/messaging/utils/storeHelpers/addOu
 import changeOutgoingMessageStatus from "@src/features/messaging/utils/storeHelpers/changeOutgoingMessageStatus";
 import getChatsListFromContacts from "@src/features/messaging/utils/storeHelpers/getChatsListFromContacts";
 import updateChatHistory from "@src/features/messaging/utils/storeHelpers/updateChatHistory";
-import { IContact } from "@src/types/account.types";
+import { IContact, IContactInfo } from "@src/types/account.types";
 import { IChat, IHistoryItem } from "@src/types/chat.types";
 import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
 import { IOutgoingStatusNotificationBody } from "@src/types/notification.types";
@@ -20,7 +20,7 @@ type TState = {
 type TActions = {
   setChats: (chats: IChat[]) => void;
   selectChat: (number: IChat, count: number) => Promise<void>;
-  addChat: (number: string) => void;
+  addChat: (contact: IContactInfo) => void;
   setChatHistory: (chatId: string, count: number) => Promise<void>;
   saveOutgoingMessage: (message: IOutgoingMessage) => void;
   updateOutgoingMessageStatus: (
@@ -59,13 +59,28 @@ const useChatsStore = create<TState & TActions>()(
           console.log(error);
         }
       },
-      addChat: number => {
-        const chat: IChat = {
-          number,
-          chatId: number + "@c.us",
-          history: []
-        };
-        set({ chats: [...get().chats, chat], current: chat });
+      addChat: async contact => {
+        try {
+          // const chatId = number + "@c.us";
+
+          if (get().chats.find(chat => chat.chatId === contact.chatId)) return;
+
+          const history = await chatApi.getChatHistory({
+            chatId: contact.chatId,
+            count: 1000
+          });
+
+          const chat: IChat = {
+            chatId: contact.chatId,
+            number: contact.chatId.slice(0, -5),
+            name: contact.name,
+            history: history || []
+          };
+
+          set({ chats: [...get().chats, chat], current: chat });
+        } catch (error) {
+          console.log(error);
+        }
       },
       setChatHistory: async (chatId, count) => {
         try {

@@ -32,3 +32,12 @@ export interface IContact {
   name: string;
   type: string;
 }
+
+export interface IContactInfo {
+  chatId: string;
+  avatar?: string;
+  name?: string;
+  email?: string;
+  category?: string;
+  description?: string;
+}
