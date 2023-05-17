@@ -5,6 +5,7 @@ export const Container = styled.div(
     display: flex;
     align-items: center;
     height: 100%;
+    padding: 0 12px;
     background-color: ${theme.palette.bg.main};
   `
 );

@@ -8,9 +8,6 @@ export const darkTheme: ITheme = {
       dark: "#025344",
       light: "#006d59"
     },
-    secondary: {
-      main: ""
-    },
     bg: {
       dark: "#111B21FF",
       main: "#202C33FF",
@@ -21,13 +18,16 @@ export const darkTheme: ITheme = {
       dark: "#8696a0"
     },
     success: {
-      main: "green"
+      main: "green",
+      light: "#9efc95"
     },
     warning: {
-      main: "yellow"
+      main: "yellow",
+      light: "#fcfb95"
     },
     error: {
-      main: "red"
+      main: "red",
+      light: "#fc9595"
     },
     msgStatus: {
       main: "#53bdeb"

@@ -1,5 +1,3 @@
-import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
-
 export interface IChat {
   number?: string;
   chatId: string;
@@ -10,9 +8,6 @@ export interface IChat {
 
 export type TMessageType = "incoming" | "outgoing";
 export type TOutgoingMessageStatus = "sent" | "delivered" | "read";
-// | "failed"
-// | "noAccount"
-// | "notInGroup";
 
 export interface IHistoryItem {
   type: TMessageType;

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC, PropsWithChildren } from "react";
+import { FC } from "react";
 
 import { ReactComponent as SpinnerSVG } from "@src/assets/img/icons/spinner.svg";
 import IconButton from "@src/components/IconButton/IconButton";

@@ -15,7 +15,5 @@ export const Text = styled.div<{ size: TSize }>(({ theme, size }) => {
   return css`
     color: ${theme.palette.text.main};
     font-size: ${curSize}px;
-
-    /* line-height: ${curSize + Math.floor(curSize / 4)}px; */
   `;
 });

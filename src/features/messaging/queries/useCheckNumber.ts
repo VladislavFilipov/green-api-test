@@ -1,14 +1,15 @@
 import { useCallback, useState } from "react";
 
 import chatApi from "@src/api/chat.api";
+import useRequestStatus from "@src/hooks/useRequestStatus";
 import { IContactInfo } from "@src/types/account.types";
 
 const useCheckNumber = () => {
-  const [isLoading, setInLoading] = useState<boolean>(false);
+  const [isLoading, error, updateStatus] = useRequestStatus();
   const [contact, setContact] = useState<IContactInfo | null>(null);
 
   const checkNumber = useCallback(async (input: string) => {
-    setInLoading(true);
+    updateStatus("loading");
     try {
       const phoneNumber = +input.replace(/\D/g, "");
       const chatId = phoneNumber + "@c.us";
@@ -19,7 +20,7 @@ const useCheckNumber = () => {
 
       if (!existsWhatsapp) {
         setContact(null);
-        setInLoading(false);
+        updateStatus("error");
         return;
       }
 
@@ -27,15 +28,20 @@ const useCheckNumber = () => {
         chatId
       });
 
-      if (contact) setContact(contact);
-      else setContact(null);
+      if (contact) {
+        setContact(contact);
+        updateStatus("success");
+      } else {
+        setContact(null);
+        updateStatus("error");
+      }
     } catch (error) {
       console.log(error);
+      updateStatus("error");
     }
-    setInLoading(false);
   }, []);
 
-  return { checkNumber, contact, setContact, isLoading };
+  return { checkNumber, contact, setContact, isLoading, error };
 };
 
 export default useCheckNumber;

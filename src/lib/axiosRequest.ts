@@ -1,6 +1,6 @@
 import Axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
-import useAccountStore from "@src/features/account/hooks/useAccountStore";
+import useAccountStore from "@src/features/account/store/useAccountStore";
 import { IAuthData } from "@src/types/account.types";
 import apiHost from "@src/utils/const/apiHost";
 

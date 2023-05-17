@@ -4,9 +4,7 @@ export type TNotificationType =
   | "incomingMessageReceived"
   | "outgoingMessageReceived"
   | "outgoingAPIMessageReceived"
-  | "outgoingMessageStatus"
-  | "stateInstanceChanged"
-  | "statusInstanceChanged";
+  | "outgoingMessageStatus";
 
 export interface INotificationBody {
   timestamp: number;

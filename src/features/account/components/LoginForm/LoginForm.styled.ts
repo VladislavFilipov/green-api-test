@@ -29,5 +29,9 @@ export const Title = styled(Text)(
     font-weight: 600;
     margin-bottom: 30px;
     text-align: center;
+
+    span {
+      font-weight: 800;
+    }
   `
 );

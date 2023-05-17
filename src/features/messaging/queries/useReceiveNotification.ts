@@ -2,7 +2,6 @@ import { useEffect } from "react";
 
 import messagingApi from "@src/api/chat.api";
 import handleNotification from "@src/features/messaging/utils/notifications/handling";
-import getErrorInstance from "@src/utils/functions/errors/getErrorInstance";
 
 let timeoutId: ReturnType<typeof setTimeout>;
 const useReceiveNotification = () => {
@@ -19,14 +18,12 @@ const useReceiveNotification = () => {
       if (notification) {
         handleNotification(notification);
         await messagingApi.deleteNotification(notification.receiptId);
-        timeoutId = setTimeout(() => receiveNotification(), 1000);
+        timeoutId = setTimeout(() => receiveNotification(), 500);
       } else {
         timeoutId = setTimeout(() => receiveNotification(), 5000);
       }
     } catch (error) {
       console.log(error);
-
-      throw getErrorInstance(error);
     }
   };
 };

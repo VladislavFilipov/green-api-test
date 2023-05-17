@@ -8,7 +8,7 @@ import * as S from "./Head.styled";
 const Head: FC<{ chat: IChat }> = ({ chat }) => {
   return (
     <S.Head>
-      <Text>{chat?.number}</Text>
+      <Text size="l">{chat?.name || chat?.number}</Text>
     </S.Head>
   );
 };

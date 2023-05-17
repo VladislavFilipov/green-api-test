@@ -1,2 +1,2 @@
 export { default as LoginForm } from "./components/LoginForm/LoginForm";
-export { default as useAccountStore } from "./hooks/useAccountStore";
+export { default as useAccountStore } from "./store/useAccountStore";

@@ -5,16 +5,19 @@ import chatApi from "@src/api/chat.api";
 import addIncomingMessage from "@src/features/messaging/utils/storeHelpers/addIncomingMessage";
 import addOutgoingMessage from "@src/features/messaging/utils/storeHelpers/addOutgoingMessage";
 import changeOutgoingMessageStatus from "@src/features/messaging/utils/storeHelpers/changeOutgoingMessageStatus";
-import getChatsListFromContacts from "@src/features/messaging/utils/storeHelpers/getChatsListFromContacts";
 import updateChatHistory from "@src/features/messaging/utils/storeHelpers/updateChatHistory";
-import { IContact, IContactInfo } from "@src/types/account.types";
-import { IChat, IHistoryItem } from "@src/types/chat.types";
+import { IContactInfo } from "@src/types/account.types";
+import { IChat } from "@src/types/chat.types";
 import { IIncomingMessage, IOutgoingMessage } from "@src/types/message.types";
 import { IOutgoingStatusNotificationBody } from "@src/types/notification.types";
+
+const ERROR_UPDATE_CHAT_HISTORY = "Ошибка при обновлении истории чата.";
 
 type TState = {
   chats: IChat[];
   current: IChat | null;
+  isLoading: boolean;
+  error: string | null;
 };
 
 type TActions = {
@@ -31,7 +34,9 @@ type TActions = {
 
 const initialState: TState = {
   chats: [],
-  current: null
+  current: null,
+  isLoading: false,
+  error: null
 };
 
 const useChatsStore = create<TState & TActions>()(
@@ -39,30 +44,26 @@ const useChatsStore = create<TState & TActions>()(
     (set, get) => ({
       ...initialState,
       setChats: async chats => {
-        // const chats = await getChatsListFromContacts(get().chats, contacts);
-
         set({
           chats
         });
       },
       selectChat: async (chat, count) => {
-        set({ current: chat });
-
         try {
+          set({ isLoading: true, error: null });
           const history = await chatApi.getChatHistory({
             chatId: chat.chatId,
             count
           });
 
-          set({ current: { ...chat, history } });
+          set({ isLoading: false, current: { ...chat, history } });
         } catch (error) {
-          console.log(error);
+          set({ error: ERROR_UPDATE_CHAT_HISTORY });
         }
       },
       addChat: async contact => {
         try {
-          // const chatId = number + "@c.us";
-
+          set({ isLoading: true, error: null });
           if (get().chats.find(chat => chat.chatId === contact.chatId)) return;
 
           const history = await chatApi.getChatHistory({
@@ -78,13 +79,18 @@ const useChatsStore = create<TState & TActions>()(
             history: history || []
           };
 
-          set({ chats: [...get().chats, chat], current: chat });
+          set({
+            isLoading: false,
+            chats: [...get().chats, chat],
+            current: chat
+          });
         } catch (error) {
-          console.log(error);
+          set({ error: "Ошибка при добавлении чата." });
         }
       },
       setChatHistory: async (chatId, count) => {
         try {
+          set({ isLoading: true, error: null });
           const history = await chatApi.getChatHistory({
             chatId: chatId,
             count
@@ -96,46 +102,64 @@ const useChatsStore = create<TState & TActions>()(
             chatId
           });
 
-          set({ chats });
+          set({ chats, isLoading: false });
         } catch (error) {
-          console.log(error);
+          set({ error: ERROR_UPDATE_CHAT_HISTORY });
         }
       },
       saveOutgoingMessage: message => {
-        const [chats, current] = addOutgoingMessage(
-          get().chats,
-          message,
-          get().current
-        );
+        try {
+          set({ isLoading: true, error: null });
+          const [chats, current] = addOutgoingMessage(
+            get().chats,
+            message,
+            get().current
+          );
 
-        set({
-          chats,
-          current
-        });
+          set({
+            isLoading: false,
+            chats,
+            current
+          });
+        } catch (error) {
+          set({ error: ERROR_UPDATE_CHAT_HISTORY });
+        }
       },
       updateOutgoingMessageStatus: notificationBody => {
-        const [chats, current] = changeOutgoingMessageStatus(
-          get().chats,
-          notificationBody,
-          get().current
-        );
+        try {
+          set({ isLoading: true, error: null });
+          const [chats, current] = changeOutgoingMessageStatus(
+            get().chats,
+            notificationBody,
+            get().current
+          );
 
-        set({
-          chats,
-          current
-        });
+          set({
+            isLoading: false,
+            chats,
+            current
+          });
+        } catch (error) {
+          set({ error: ERROR_UPDATE_CHAT_HISTORY });
+        }
       },
       saveIncomingMessage: message => {
-        const [chats, current] = addIncomingMessage(
-          get().chats,
-          message,
-          get().current
-        );
+        try {
+          set({ isLoading: true, error: null });
+          const [chats, current] = addIncomingMessage(
+            get().chats,
+            message,
+            get().current
+          );
 
-        set({
-          chats,
-          current
-        });
+          set({
+            isLoading: false,
+            chats,
+            current
+          });
+        } catch (error) {
+          set({ error: ERROR_UPDATE_CHAT_HISTORY });
+        }
       }
     }),
     {
