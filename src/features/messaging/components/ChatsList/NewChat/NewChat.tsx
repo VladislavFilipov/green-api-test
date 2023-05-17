@@ -2,6 +2,7 @@ import { FC, SyntheticEvent, useState } from "react";
 
 import { ReactComponent as PlusSVG } from "@src/assets/img/icons/plus.svg";
 import IconButton from "@src/components/IconButton/IconButton";
+import Spinner from "@src/components/Spinner/Spinner";
 import Text from "@src/components/Text/Text";
 import { TextFieldInput } from "@src/components/TextField/TextField";
 import useCheckNumber from "@src/features/messaging/queries/useCheckNumber";
@@ -46,7 +47,7 @@ const NewChat: FC = () => {
           placeholder="Новый чат"
         />
 
-        {isLoading && "load"}
+        {isLoading && <Spinner />}
 
         {contact && (
           <S.Contact>

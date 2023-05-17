@@ -56,6 +56,15 @@ const GlobalStyles = createGlobalStyle`
     background: #d3d3d351;
   }
       
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 export default GlobalStyles;
