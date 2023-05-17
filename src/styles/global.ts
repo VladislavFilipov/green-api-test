@@ -27,6 +27,15 @@ const GlobalStyles = createGlobalStyle`
     border: none;
     outline: none;
   }
+
+  textarea {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    &::placeholder {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  }
 `;
 
 export default GlobalStyles;

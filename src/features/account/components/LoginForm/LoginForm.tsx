@@ -20,6 +20,10 @@ const LoginForm: FC = () => {
   }, [accountSettingsRes.isSuccess]);
 
   const methods = useForm<IAuthData>({
+    defaultValues: {
+      idInstance: "",
+      apiToketInstance: ""
+    },
     resolver: yupResolver(schema)
   });
 

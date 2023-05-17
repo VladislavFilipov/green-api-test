@@ -5,7 +5,7 @@ export const Input = styled.div(
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 1rem;
+    padding: 12px 20px 8px;
     background-color: ${theme.palette.bg.main};
   `
 );
