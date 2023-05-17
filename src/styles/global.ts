@@ -1,19 +1,10 @@
-import Bold from "@src/assets/fonts/Roboto-Bold.ttf";
-import Medium from "@src/assets/fonts/Roboto-Medium.ttf";
-import Regular from "@src/assets/fonts/Roboto-Regular.ttf";
 import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
-  @font-face {
-    font-family: Roboto;
-    src: url(.${Regular}) format("truetype"),
-    url(.${Medium}) format("truetype"),
-    url(.${Bold}) format("truetype");
-  }
+const GlobalStyles = createGlobalStyle`
 
   :root {
-    font-family: Roboto, sans-serif;
-    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
   }
 
   * {
@@ -24,8 +15,56 @@ export default createGlobalStyle`
   }
 
   #root{
-    margin:0 auto;
-    color: white;
-    background-color: black;
+    margin: 0 auto;
+  }
+
+  ul, ol, li {
+    list-style: none;
+  }
+
+  input, button {
+    appearance: none;
+    border: none;
+    outline: none;
+  }
+
+  textarea {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    &::placeholder {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  }
+
+   
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d3d3d335;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #d3d3d351;
+  }
+      
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
+
+export default GlobalStyles;
