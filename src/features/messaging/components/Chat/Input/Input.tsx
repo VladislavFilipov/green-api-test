@@ -1,6 +1,7 @@
 import { FC, useRef, useState } from "react";
 
-import { ReactComponent as SendMsgSVG } from "@src/assets/icons/send-msg.svg";
+import { ReactComponent as SendMsgSVG } from "@src/assets/img/icons/send-msg.svg";
+import IconButton from "@src/components/IconButton/IconButton";
 import { TextFieldTextarea } from "@src/components/TextField/TextField";
 import useSendMessage from "@src/features/messaging/queries/useSendMessage";
 import { IChat } from "@src/types/chat.types";
@@ -28,9 +29,9 @@ const Input: FC<{ chat: IChat }> = ({ chat }) => {
         onChange={value => setInput(value)}
         isTextarea
       />
-      <div onClick={handleSendClick}>
+      <IconButton onClick={handleSendClick}>
         <SendMsgSVG />
-      </div>
+      </IconButton>
       {/* <button onClick={handleSendClick}>Send</button> */}
     </S.Input>
   );

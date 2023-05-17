@@ -22,7 +22,7 @@ const GlobalStyles = createGlobalStyle`
     list-style: none;
   }
 
-  input {
+  input, button {
     appearance: none;
     border: none;
     outline: none;
@@ -36,6 +36,26 @@ const GlobalStyles = createGlobalStyle`
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
   }
+
+   
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #d3d3d335;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #d3d3d351;
+  }
+      
 `;
 
 export default GlobalStyles;

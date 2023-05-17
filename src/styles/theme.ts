@@ -31,6 +31,9 @@ export const darkTheme: ITheme = {
     },
     msgStatus: {
       main: "#53bdeb"
+    },
+    iconColor: {
+      main: "#8696a0"
     }
   }
 };

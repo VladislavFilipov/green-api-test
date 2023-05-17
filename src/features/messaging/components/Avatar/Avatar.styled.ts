@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { ReactComponent as AvatarPlaceholderSVG } from "@src/assets/icons/avatar-placeholder.svg";
+import { ReactComponent as AvatarPlaceholderSVG } from "@src/assets/img/icons/avatar-placeholder.svg";
 import Text from "@src/components/Text/Text";
 
 export const Container = styled(Text)<{ size?: number }>(

@@ -55,7 +55,7 @@ export const Input = styled.input<TInputBlockProps>(
 export const Textarea = styled.textarea<TInputBlockProps>(
   props => css`
     ${InputBlock(props)}
-    padding: 8px 11px 10px;
+    padding: 7px 11px 10px;
     resize: none;
     line-height: 20px;
     overflow-x: hidden;

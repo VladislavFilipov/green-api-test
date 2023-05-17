@@ -1,12 +1,15 @@
 import styled, { css } from "styled-components";
 
+import bgChat from "@src/assets/img/bg-chat.png";
+
 export const Container = styled.div(
   ({ theme }) => css`
-    /* display: flex;
-    flex-direction: column;
-    justify-content: flex-end; */
     height: 100%;
     overflow: auto;
+
+    /* background-image: url(${bgChat});
+    background-size: 40%;
+    opacity: 0.1; */
   `
 );
 

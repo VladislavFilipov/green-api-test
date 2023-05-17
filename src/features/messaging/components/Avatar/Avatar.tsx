@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { ReactComponent as AvatarPlaceholderSVG } from "@src/assets/icons/avatar-placeholder.svg";
+import { ReactComponent as AvatarPlaceholderSVG } from "@src/assets/img/icons/avatar-placeholder.svg";
 
 import * as S from "./Avatar.styled";
 

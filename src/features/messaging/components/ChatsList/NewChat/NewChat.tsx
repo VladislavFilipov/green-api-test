@@ -1,5 +1,7 @@
 import { FC, SyntheticEvent, useState } from "react";
 
+import { ReactComponent as PlusSVG } from "@src/assets/img/icons/plus.svg";
+import IconButton from "@src/components/IconButton/IconButton";
 import Text from "@src/components/Text/Text";
 import { TextFieldInput } from "@src/components/TextField/TextField";
 import useCheckNumber from "@src/features/messaging/queries/useCheckNumber";
@@ -17,7 +19,6 @@ const NewChat: FC = () => {
   const { checkNumber, contact, setContact, isLoading } = useCheckNumber();
 
   const handleChange = (value: string) => {
-    console.log(value);
     setInput(value);
 
     clearTimeout(delayId);
@@ -34,6 +35,7 @@ const NewChat: FC = () => {
       setContact(null);
     }
   };
+  console.log("isLoading", isLoading);
 
   return (
     <S.Container>
@@ -43,10 +45,19 @@ const NewChat: FC = () => {
           onChange={handleChange}
           placeholder="Новый чат"
         />
-        <button type="submit">Add Chat</button>
+
+        {isLoading && "load"}
+
+        {contact && (
+          <S.Contact>
+            <Text>{contact.name || contact.chatId.slice(0, -5)}</Text>
+
+            <IconButton type="submit">
+              <PlusSVG />
+            </IconButton>
+          </S.Contact>
+        )}
       </form>
-      {isLoading && <Text>Loading...</Text>}
-      {contact && <Text>{contact.name || contact.chatId}</Text>}
     </S.Container>
   );
 };
