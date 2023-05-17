@@ -15,5 +15,6 @@ export interface ITheme {
     warning: IThemeColor;
     error: IThemeColor;
     msgStatus: IThemeColor;
+    iconColor: IThemeColor;
   };
 }

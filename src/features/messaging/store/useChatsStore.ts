@@ -74,6 +74,7 @@ const useChatsStore = create<TState & TActions>()(
             chatId: contact.chatId,
             number: contact.chatId.slice(0, -5),
             name: contact.name,
+            avatar: contact.avatar,
             history: history || []
           };
 

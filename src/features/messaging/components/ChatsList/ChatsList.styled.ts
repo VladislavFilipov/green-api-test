@@ -8,3 +8,11 @@ export const Container = styled.div(
     height: 100%;
   `
 );
+export const Head = styled.div(
+  ({ theme }) => css`
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: ${theme.palette.bg.main};
+  `
+);

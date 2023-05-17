@@ -19,6 +19,7 @@ const useCheckNumber = () => {
 
       if (!existsWhatsapp) {
         setContact(null);
+        setInLoading(false);
         return;
       }
 

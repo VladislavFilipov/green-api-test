@@ -1,6 +1,8 @@
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 
-import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
+import { ReactComponent as SendMsgSVG } from "@src/assets/img/icons/send-msg.svg";
+import IconButton from "@src/components/IconButton/IconButton";
+import { TextFieldTextarea } from "@src/components/TextField/TextField";
 import useSendMessage from "@src/features/messaging/queries/useSendMessage";
 import { IChat } from "@src/types/chat.types";
 
@@ -8,6 +10,7 @@ import * as S from "./Input.styled";
 
 const Input: FC<{ chat: IChat }> = ({ chat }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [input, setInput] = useState<string>("");
   const sendMessage = useSendMessage();
 
   const handleSendClick = () => {
@@ -21,9 +24,15 @@ const Input: FC<{ chat: IChat }> = ({ chat }) => {
 
   return (
     <S.Input>
-      <TextFieldWithRef ref={inputRef} />
-      <div onClick={handleSendClick}></div>
-      <button onClick={handleSendClick}>Send</button>
+      <TextFieldTextarea
+        value={input}
+        onChange={value => setInput(value)}
+        isTextarea
+      />
+      <IconButton onClick={handleSendClick}>
+        <SendMsgSVG />
+      </IconButton>
+      {/* <button onClick={handleSendClick}>Send</button> */}
     </S.Input>
   );
 };

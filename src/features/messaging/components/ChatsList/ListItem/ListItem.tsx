@@ -1,5 +1,6 @@
 import { FC } from "react";
 
+import Avatar from "@src/features/messaging/components/Avatar/Avatar";
 import MessageStatus from "@src/features/messaging/components/MessageStatus/MessageStatus";
 import Time from "@src/features/messaging/components/Time/Time";
 import useChatsStore from "@src/features/messaging/store/useChatsStore";
@@ -15,7 +16,7 @@ const ListItem: FC<{ chat: IChat; active: boolean }> = ({ chat, active }) => {
 
   return (
     <S.Container active={active} onClick={handleChatClcik}>
-      <S.Avatar></S.Avatar>
+      <Avatar url={chat.avatar} />
       <S.Line1>
         <S.Name size="l">{chat.name || chat.number}</S.Name>
         {lastMessage && <Time timestamp={lastMessage.timestamp} />}

@@ -1,25 +1,14 @@
-import {
-  ChangeEvent,
-  EventHandler,
-  FC,
-  FormEvent,
-  SyntheticEvent,
-  useRef,
-  useState
-} from "react";
-import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
+import { FC, SyntheticEvent, useState } from "react";
 
-import { yupResolver } from "@hookform/resolvers/yup";
-
+import { ReactComponent as PlusSVG } from "@src/assets/img/icons/plus.svg";
+import IconButton from "@src/components/IconButton/IconButton";
+import Spinner from "@src/components/Spinner/Spinner";
 import Text from "@src/components/Text/Text";
-import TextField from "@src/components/TextField/TextField";
-import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
-import InputText from "@src/components/formInputs/InputText/InputText";
+import { TextFieldInput } from "@src/components/TextField/TextField";
 import useCheckNumber from "@src/features/messaging/queries/useCheckNumber";
 import useChatsStore from "@src/features/messaging/store/useChatsStore";
 
 import * as S from "./NewChat.styled";
-import schema from "./_yupSchema";
 
 export type TInput = { input: string };
 
@@ -31,7 +20,6 @@ const NewChat: FC = () => {
   const { checkNumber, contact, setContact, isLoading } = useCheckNumber();
 
   const handleChange = (value: string) => {
-    console.log(value);
     setInput(value);
 
     clearTimeout(delayId);
@@ -48,34 +36,31 @@ const NewChat: FC = () => {
       setContact(null);
     }
   };
+  console.log("isLoading", isLoading);
 
   return (
     <S.Container>
       <form onSubmit={handleSubmit}>
-        <TextField
+        <TextFieldInput
           value={input}
-          onChange={({ currentTarget }) => handleChange(currentTarget.value)}
+          onChange={handleChange}
           placeholder="Новый чат"
         />
-        <button type="submit">Add Chat</button>
+
+        {isLoading && <Spinner />}
+
+        {contact && (
+          <S.Contact>
+            <Text>{contact.name || contact.chatId.slice(0, -5)}</Text>
+
+            <IconButton type="submit">
+              <PlusSVG />
+            </IconButton>
+          </S.Contact>
+        )}
       </form>
-      {isLoading && <Text>Loading...</Text>}
-      {contact && <Text>{contact.name || contact.chatId}</Text>}
     </S.Container>
   );
 };
 
 export default NewChat;
-{
-  /* // <TextFieldWithRef ref={inputRef} placeholder="Новый чат" />
-        // <button
-        //   onClick={() => {
-        //     if (inputRef.current?.value) {
-        //       addChat(inputRef.current?.value);
-        //       inputRef.current.value = "";
-        //     }
-        //   }}
-        // >
-        //   Add Chat
-        // </button> */
-}

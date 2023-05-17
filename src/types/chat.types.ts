@@ -4,6 +4,7 @@ export interface IChat {
   number?: string;
   chatId: string;
   name?: string;
+  avatar?: string;
   history: IHistoryItem[];
 }
 

@@ -1,7 +1,7 @@
-import { FC, forwardRef, InputHTMLAttributes } from "react";
-import { useFormContext } from "react-hook-form";
+import { FC } from "react";
+import { useFormContext, Controller } from "react-hook-form";
 
-import TextFieldWithRef from "@src/components/TextField/TextFieldWithRef";
+import { TextFieldInput } from "@src/components/TextField/TextField";
 
 type TProps = {
   name: string;
@@ -11,16 +11,24 @@ type TProps = {
 
 const InputText: FC<TProps> = ({ name, label, placeholder }) => {
   const {
-    register,
+    control,
     formState: { errors }
   } = useFormContext();
 
   return (
-    <TextFieldWithRef
-      label={label}
-      error={errors[name]?.message?.toString()}
-      {...register(name)}
-      placeholder={placeholder}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <TextFieldInput
+          // {...field}
+          label={label}
+          value={field.value}
+          onChange={field.onChange}
+          error={errors[name]?.message?.toString()}
+          placeholder={placeholder}
+        />
+      )}
     />
   );
 };
