@@ -36,7 +36,6 @@ const NewChat: FC = () => {
       setContact(null);
     }
   };
-  console.log("isLoading", isLoading);
 
   return (
     <S.Container>

@@ -1,23 +1,20 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm, FormProvider } from "react-hook-form";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import Button from "@src/components/Button/Button";
+import Spinner from "@src/components/Spinner/Spinner";
+import StatusLabel from "@src/components/StatusLabel/StatusLabel";
 import InputText from "@src/components/formInputs/InputText/InputText";
 import schema from "@src/features/account/components/LoginForm/_yupSchema";
-import useGetAccountSettingsQuery from "@src/features/account/hooks/useGetAccountSettingsQuery";
+import useGetAccountSettings from "@src/features/account/queries/useGetAccountSettings";
 import { IAuthData } from "@src/types/account.types";
 
 import * as S from "./LoginForm.styled";
 
 const LoginForm: FC = () => {
-  const [authData, setAuthData] = useState<IAuthData | null>(null);
-  const accountSettingsRes = useGetAccountSettingsQuery(authData);
-
-  useEffect(() => {
-    if (accountSettingsRes.isSuccess) setAuthData(null);
-  }, [accountSettingsRes.isSuccess]);
+  const [getAccountSettings, isLoading, error] = useGetAccountSettings();
 
   const methods = useForm<IAuthData>({
     defaultValues: {
@@ -28,16 +25,20 @@ const LoginForm: FC = () => {
   });
 
   const submitHandler: SubmitHandler<IAuthData> = authData => {
-    setAuthData(authData);
+    getAccountSettings(authData);
   };
 
   return (
     <FormProvider {...methods}>
       <S.Form onSubmit={methods.handleSubmit(submitHandler)}>
-        <S.Title>Войти при помощи аккаунта GREEN-API</S.Title>
+        <S.Title>
+          Войти при помощи аккаунта <span>GREEN-API</span>
+        </S.Title>
         <InputText name="idInstance" placeholder="Номер аккаунта" />
         <InputText name="apiToketInstance" placeholder="Ключ доступа" />
-        <Button text="Войти" type="submit" />
+
+        {error && <StatusLabel status="error">{error}</StatusLabel>}
+        {!isLoading ? <Button text="Войти" type="submit" /> : <Spinner />}
       </S.Form>
     </FormProvider>
   );

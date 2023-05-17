@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 
-import { ReactComponent as AvatarPlaceholderSVG } from "@src/assets/img/icons/avatar-placeholder.svg";
 import Text from "@src/components/Text/Text";
 
 export const Container = styled(Text)<{ size?: number }>(
@@ -17,9 +16,5 @@ export const Image = styled.img<{ size?: number }>(
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-    /* background-repeat: none;
-    background-position: center;
-    background-size: cover; */
   `
 );

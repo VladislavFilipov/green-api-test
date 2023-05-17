@@ -9,7 +9,7 @@ import * as S from "./ChatsList.styled";
 const ChatsList: FC = () => {
   return (
     <S.Container>
-      <S.Head />
+      <Head />
       <NewChat />
       <List />
     </S.Container>

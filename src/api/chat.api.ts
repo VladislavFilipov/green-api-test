@@ -1,5 +1,5 @@
 import request from "@src/lib/axiosRequest";
-import { IContact, IContactInfo } from "@src/types/account.types";
+import { IContactInfo } from "@src/types/account.types";
 import { IHistoryItem } from "@src/types/chat.types";
 import { TSendOutgoingMessage } from "@src/types/message.types";
 import { INotification } from "@src/types/notification.types";

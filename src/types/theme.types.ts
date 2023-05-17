@@ -4,17 +4,18 @@ export interface IThemeColor {
   dark?: string;
 }
 
+export interface IThemePalette {
+  primary: IThemeColor;
+  bg: IThemeColor;
+  text: IThemeColor;
+  success: IThemeColor;
+  warning: IThemeColor;
+  error: IThemeColor;
+  msgStatus: IThemeColor;
+  iconColor: IThemeColor;
+}
+
 export interface ITheme {
   mode: "dark" | "light";
-  palette: {
-    primary: IThemeColor;
-    secondary: IThemeColor;
-    bg: IThemeColor;
-    text: IThemeColor;
-    success: IThemeColor;
-    warning: IThemeColor;
-    error: IThemeColor;
-    msgStatus: IThemeColor;
-    iconColor: IThemeColor;
-  };
+  palette: IThemePalette;
 }

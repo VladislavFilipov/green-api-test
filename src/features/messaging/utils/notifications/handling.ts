@@ -29,10 +29,6 @@ const handleNotification = async (notification: INotification) => {
           notification.body as IOutgoingStatusNotificationBody
         );
       break;
-    // case "stateInstanceChanged":
-    //   break;
-    // case "statusInstanceChanged":
-    //   break;
 
     default:
       break;

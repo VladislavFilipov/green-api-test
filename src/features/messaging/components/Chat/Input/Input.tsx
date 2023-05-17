@@ -1,7 +1,8 @@
-import { FC, useRef, useState } from "react";
+import { FC, useCallback, useState } from "react";
 
 import { ReactComponent as SendMsgSVG } from "@src/assets/img/icons/send-msg.svg";
 import IconButton from "@src/components/IconButton/IconButton";
+import Spinner from "@src/components/Spinner/Spinner";
 import { TextFieldTextarea } from "@src/components/TextField/TextField";
 import useSendMessage from "@src/features/messaging/queries/useSendMessage";
 import { IChat } from "@src/types/chat.types";
@@ -9,18 +10,18 @@ import { IChat } from "@src/types/chat.types";
 import * as S from "./Input.styled";
 
 const Input: FC<{ chat: IChat }> = ({ chat }) => {
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const [input, setInput] = useState<string>("");
-  const sendMessage = useSendMessage();
+  const { sendMessage, isLoading } = useSendMessage();
 
-  const handleSendClick = () => {
-    if (inputRef.current?.value && chat) {
+  const handleSendClick = useCallback(() => {
+    if (input) {
       sendMessage({
         chatId: chat.chatId,
-        message: inputRef.current?.value
+        message: input
       });
+      setInput("");
     }
-  };
+  }, [input, chat]);
 
   return (
     <S.Input>
@@ -29,10 +30,13 @@ const Input: FC<{ chat: IChat }> = ({ chat }) => {
         onChange={value => setInput(value)}
         isTextarea
       />
-      <IconButton onClick={handleSendClick}>
-        <SendMsgSVG />
-      </IconButton>
-      {/* <button onClick={handleSendClick}>Send</button> */}
+      {!isLoading ? (
+        <IconButton onClick={handleSendClick}>
+          <SendMsgSVG />
+        </IconButton>
+      ) : (
+        <Spinner />
+      )}
     </S.Input>
   );
 };
